@@ -9,43 +9,70 @@ import {
 } from '@mui/material';
 import { Bolt } from '@mui/icons-material';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+// import { useState } from 'react';
+// import { addEmailToWaitlist } from '../../services/waitlistService';
 
 export const Landing = () => {
+  // TODO: Uncomment this when the waitlist is ready
+  // const [email, setEmail] = useState('');
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [message, setMessage] = useState('');
+
+  // const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setEmail(event.target.value);
+  // };
+
+  // const handleJoinWaitlist = async () => {
+  //   if (!email || !email.includes('@')) {
+  //     setMessage('Please enter a valid email address');
+  //     return;
+  //   }
+
+  //   setIsLoading(true);
+  //   setMessage('');
+
+  //   try {
+  //     await addEmailToWaitlist(email);
+  //     setMessage('Successfully joined the waitlist!');
+  //     setEmail('');
+  //   } catch (error) {
+  //     setMessage(error instanceof Error ? error.message : 'Network error. Please try again.');
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
   const teamMembers = [
     {
       name: 'Amir Tarkian',
       // education: 'Business Development Lead',
       role: 'Technical Producer & Developer Outreach',
-      position: (
-        <Link href="https://www.linkedin.com/in/amirtarkian">LinkedIn</Link>
-      ),
+      linkedin: 'https://www.linkedin.com/in/amirtarkian',
+      github: 'https://github.com/amirtarkian',
       avatar: './amir-headshot.jpeg',
     },
     {
       name: 'Mia Siner',
       // education: 'Finance & Operations Lead',
       role: 'Operations & Pipeline Coordinator',
-      position: (
-        <Link href="https://www.linkedin.com/in/miasiner">LinkedIn</Link>
-      ),
+      linkedin: 'https://www.linkedin.com/in/miasiner',
+      github: 'https://github.com/miasiner',
       avatar: './mia-headshot.jpeg',
     },
     {
       name: 'Mikil Foss',
       // education: 'Machine Learning Research Engineer',
       role: 'Gameplay Systems & Tooling Engineer',
-      position: (
-        <Link href="https://www.linkedin.com/in/mikil-foss/">LinkedIn</Link>
-      ),
+      linkedin: 'https://www.linkedin.com/in/mikil-foss/',
+      github: 'https://github.com/mikilfoss',
       avatar: './mikil-headshot.jpeg',
     },
     {
       name: 'Owen Ratgen',
       // education: 'Full Stack & Cloud Engineer',
       role: 'UI/UX & Frontend Systems Developer',
-      position: (
-        <Link href="https://www.linkedin.com/in/owen-ratgen">LinkedIn</Link>
-      ),
+      linkedin: 'https://www.linkedin.com/in/owen-ratgen',
+      github: 'https://github.com/owenratgen',
       avatar: './owen-headshot.jpeg',
     },
   ];
@@ -96,11 +123,34 @@ export const Landing = () => {
             label="Enter your email"
             variant="outlined"
             type="email"
+            // TODO: Uncomment this when the waitlist is ready
+            // value={email}
+            // onChange={handleEmailChange}
             fullWidth
             sx={{ minWidth: 300 }}
           />
-          <Button variant="contained">Join</Button>
+          <Button 
+            variant="contained" 
+            // TODO: Uncomment this when the waitlist is ready
+            // onClick={handleJoinWaitlist}
+            // disabled={isLoading}
+          >
+            {/* {isLoading ? 'Joining...' : 'Join'} */}
+            Join
+          </Button>
         </Box>
+        {/* // TODO: Uncomment this when the waitlist is ready */}
+        {/* {message && (
+          <Typography 
+            variant="body2" 
+            sx={{ 
+              mt: 2, 
+              color: message.includes('Successfully') ? 'success.main' : 'error.main' 
+            }}
+          >
+            {message}
+          </Typography>
+        )} */}
       </Box>
 
       {/* About Us Section */}
@@ -201,7 +251,7 @@ export const Landing = () => {
                 }}
               >
                 <Link
-                  href="https://www.linkedin.com/in/amirtarkian"
+                  href={member.linkedin}
                   sx={{ display: 'flex', alignItems: 'center' }}
                 >
                   <svg
@@ -248,7 +298,7 @@ export const Landing = () => {
                   </svg>
                 </Link>
                 <Link
-                  href="https://github.com/amirtarkian"
+                  href={member.github}
                   sx={{ display: 'flex', alignItems: 'center' }}
                 >
                   <svg
@@ -509,10 +559,19 @@ export const Landing = () => {
             label="Enter your email"
             variant="outlined"
             type="email"
+            // TODO: Uncomment this when the waitlist is ready
+            // value={email}
+            // onChange={handleEmailChange}
             fullWidth
             sx={{ minWidth: 220 }}
           />
-          <Button variant="contained" size="large">
+          <Button 
+            variant="contained" 
+            size="large" 
+            // onClick={handleJoinWaitlist}
+            // disabled={isLoading}
+          >
+            {/* {isLoading ? 'Joining...' : 'Join'} */}
             Join
           </Button>
         </Box>

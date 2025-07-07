@@ -164,6 +164,18 @@ const theme = createTheme({
           },
           '& .MuiOutlinedInput-input': {
             color: '#FFFFFF',
+            '&:-webkit-autofill': {
+              WebkitBoxShadow: '0 0 0 1000px #35317c inset',
+              WebkitTextFillColor: '#FFFFFF',
+            },
+            '&:-webkit-autofill:hover': {
+              WebkitBoxShadow: '0 0 0 1000px #35317c inset',
+              WebkitTextFillColor: '#FFFFFF',
+            },
+            '&:-webkit-autofill:focus': {
+              WebkitBoxShadow: '0 0 0 1000px #35317c inset',
+              WebkitTextFillColor: '#FFFFFF',
+            },
           },
         },
       },
