@@ -2,436 +2,546 @@ import {
     Box,
     Typography,
     Button,
-    Avatar,
     Container,
-    Link,
     Card,
     CardContent,
+    Grid,
+    Chip,
+    Stack,
+    Divider,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Paper,
 } from '@mui/material';
 import {
-    TrendingUp,
-    Psychology,
-    Gamepad,
+    RocketLaunch,
+    AutoAwesome,
+    Engineering,
+    Verified,
     Speed,
-    LinkedIn,
-    GitHub,
+    Psychology,
+    Code,
+    Check,
+    StarRate,
+    Groups,
 } from '@mui/icons-material';
 
 export const Invest = () => {
-    const teamMembers = [
+    const pricingTiers = [
         {
-            name: 'Amir Tarkian',
-            role: 'AI Software Developer',
-            company: 'HUDL',
-            expertise: 'AI development, technical leadership',
-            linkedin: 'https://www.linkedin.com/in/amirtarkian',
-            github: 'https://github.com/amirtarkian',
-            avatar: './amir-headshot.jpeg',
+            name: 'Basic Demo',
+            price: '$300',
+            originalPrice: null,
+            discount: null,
+            demos: 1,
+            popular: false,
+            features: [
+                '1.5-2 minute demo video',
+                '5-10 minute playable demo',
+                'Source code delivered',
+                'Full quality assurance testing',
+                'Money Back Guarantee',
+                '2-week turnaround',
+            ],
         },
         {
-            name: 'Mikil Foss',
-            role: 'ML Research Engineer',
-            company: 'Oak Ridge National Lab',
-            expertise: 'Machine learning research, advanced AI systems',
-            linkedin: 'https://www.linkedin.com/in/mikil-foss/',
-            github: 'https://github.com/mikilfoss',
-            avatar: './mikil-headshot.jpeg',
+            name: 'Enhanced Demo',
+            price: '$500',
+            originalPrice: null,
+            discount: null,
+            demos: 1,
+            popular: true,
+            features: [
+                '15-20 minutes of playable content',
+                'Limited art asset creation (Done by an in house digital artist, never AI)',
+                'Source code delivered',
+                'Full quality assurance testing',
+                'Money Back Guarantee',
+                '2-week turnaround',
+                'Priority support',
+            ],
         },
         {
-            name: 'Owen Ratgen',
-            role: 'Software Engineer',
-            company: 'Masters in CS - Distributed Systems & AI',
-            expertise: 'Distributed systems, AI architecture, full-stack development',
-            linkedin: 'https://www.linkedin.com/in/owen-ratgen',
-            github: 'https://github.com/owenratgen',
-            avatar: './owen-headshot.jpeg',
-        },
-        {
-            name: 'Mia Siner',
-            role: 'Finance Manager',
-            company: 'Creevo',
-            expertise: 'Financial management, business operations',
-            linkedin: 'https://www.linkedin.com/in/miasiner/',
-            github: '',
-            avatar: './mia-headshot.jpeg',
+            name: 'Complete Package',
+            price: '$1,000',
+            originalPrice: null,
+            discount: null,
+            demos: 1,
+            popular: false,
+            features: [
+                '15-20 minutes of playable content',
+                'Complete art asset generation',
+                'Basic marketing support',
+                'Kickstarter page assistance',
+                'Full quality assurance testing',
+                'Source code delivered',
+                'Money Back Guarantee',
+                '2-week turnaround',
+                'Priority support',
+            ],
         },
     ];
 
-    const keyMetrics = [
+    const howItWorksSteps = [
         {
-            icon: <Psychology sx={{ fontSize: 40, color: '#8B5CF6' }} />,
-            title: 'AI-Powered Development',
-            description: 'Proprietary AI tools that accelerate game demo creation by 10x',
+            icon: <Psychology sx={{ fontSize: 48, color: '#8B5CF6' }} />,
+            title: 'AI Handles the Heavy Lifting',
+            description: 'Our proprietary AI tooling analyzes your game concept and automatically generates boilerplate code, basic game mechanics, and foundational systems. This covers 70-80% of the initial development work.',
         },
         {
-            icon: <Gamepad sx={{ fontSize: 40, color: '#06B6D4' }} />,
-            title: 'Game Industry Focus',
-            description: 'Specialized platform designed specifically for game developers and creators',
+            icon: <Engineering sx={{ fontSize: 48, color: '#06B6D4' }} />,
+            title: 'Expert Human Guidance',
+            description: 'A top-tier developer guides the overall technical approach, making architectural decisions and ensuring the demo aligns with industry best practices and your specific vision.',
         },
         {
-            icon: <Speed sx={{ fontSize: 40, color: '#8B5CF6' }} />,
-            title: 'Rapid Prototyping',
-            description: 'From concept to playable demo in days, not months',
+            icon: <Verified sx={{ fontSize: 48, color: '#10B981' }} />,
+            title: '100% Quality Guarantee',
+            description: 'Our human developers verify that every demo meets our strict quality standards, ensuring smooth gameplay, polished features, and professional-grade deliverables. Whatever your game needs, we will make it happen. If for whatever reason you are not satisfied with the demo, we will refund 100% of your money within 24 hours.',
+        },
+    ];
+
+    const features = [
+        {
+            icon: <Speed sx={{ fontSize: 32, color: '#8B5CF6' }} />,
+            title: 'Lightning Fast',
+            description: 'From concept to playable demo in just 2 weeks',
         },
         {
-            icon: <TrendingUp sx={{ fontSize: 40, color: '#06B6D4' }} />,
-            title: 'Scalable Technology',
-            description: 'Cloud-native architecture built to handle enterprise-level demand',
+            icon: <AutoAwesome sx={{ fontSize: 32, color: '#06B6D4' }} />,
+            title: 'AI-Powered',
+            description: 'Cutting-edge AI handles the bulk development work',
+        },
+        {
+            icon: <Code sx={{ fontSize: 32, color: '#10B981' }} />,
+            title: 'Full Source Code',
+            description: 'You own 100% of the code and can modify it freely',
+        },
+        {
+            icon: <Groups sx={{ fontSize: 32, color: '#F59E0B' }} />,
+            title: 'Expert Team',
+            description: 'Top developer talent ensures professional quality',
         },
     ];
 
     return (
-        <Container maxWidth="lg" sx={{ py: 10 }}>
+        <Container maxWidth="lg" sx={{ py: 8 }}>
             {/* Hero Section */}
             <Box
                 sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
                     textAlign: 'center',
-                    gap: 4,
-                    minHeight: '60vh',
-                    mb: 14,
-                    mt: 6,
-                }}
-            >
-                <Typography variant="h1" sx={{ color: 'text.primary' }}>
-                    Investing in the Future of Game Development
-                </Typography>
-
-                <Typography
-                    variant="body1"
-                    sx={{
-                        maxWidth: 700,
-                        mb: 4,
-                        color: 'text.secondary',
-                        fontSize: '1.2rem',
-                        lineHeight: 1.6,
-                    }}
-                >
-                    Creevo empowers developers to transform game ideas into playable demos using cutting-edge AI technology.
-                    We're revolutionizing how games are prototyped and developed.
-                </Typography>
-
-                <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap', justifyContent: 'center' }}>
-                    <Button
-                        variant="contained"
-                        size="large"
-                        href="#contact-section"
-                        sx={{ px: 4, py: 2 }}
-                    >
-                        Contact for Investment
-                    </Button>
-                    <Button
-                        variant="outlined"
-                        size="large"
-                        href="#team-section"
-                        sx={{ px: 4, py: 2 }}
-                    >
-                        Meet the Team
-                    </Button>
-                </Box>
-            </Box>
-
-            {/* Value Proposition Section */}
-            <Box sx={{ textAlign: 'center', mb: 16 }}>
-                <Typography variant="h2" sx={{ mb: 4, color: 'text.primary' }}>
-                    The Opportunity
-                </Typography>
-                <Typography
-                    variant="body1"
-                    sx={{
-                        maxWidth: 800,
-                        mx: 'auto',
-                        mb: 6,
-                        color: 'text.secondary',
-                        fontSize: '1.1rem',
-                        lineHeight: 1.7,
-                    }}
-                >
-                    The game development industry is worth over $300 billion globally, yet most game ideas never become
-                    reality due to the high cost and complexity of creating playable prototypes. Creevo solves this with
-                    our proprietary AI toolchain that enables rapid demo creation for ideators, designers, and artists.
-                </Typography>
-
-                <Box
-                    sx={{
-                        display: 'grid',
-                        gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
-                        gap: 4,
-                        mt: 4,
-                    }}
-                >
-                    {keyMetrics.map((metric, index) => (
-                        <Card
-                            key={index}
-                            sx={{
-                                p: 4,
-                                height: '100%',
-                                background: 'rgba(255,255,255,0.05)',
-                                border: '1px solid rgba(139,92,246,0.15)',
-                                boxShadow: '0 4px 24px rgba(139, 92, 246, 0.10)',
-                                transition: 'all 0.3s',
-                                '&:hover': {
-                                    transform: 'translateY(-4px)',
-                                    boxShadow: '0 12px 48px rgba(139, 92, 246, 0.15)',
-                                },
-                            }}
-                        >
-                            <CardContent sx={{ textAlign: 'center' }}>
-                                <Box sx={{ mb: 3 }}>
-                                    {metric.icon}
-                                </Box>
-                                <Typography
-                                    variant="h6"
-                                    sx={{ mb: 2, fontWeight: 600, color: 'text.primary' }}
-                                >
-                                    {metric.title}
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    sx={{ color: 'text.secondary', lineHeight: 1.6 }}
-                                >
-                                    {metric.description}
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    ))}
-                </Box>
-            </Box>
-
-            {/* Technology Section */}
-            <Box sx={{ textAlign: 'center', mb: 16 }}>
-                <Typography variant="h2" sx={{ mb: 4, color: 'text.primary' }}>
-                    Our Technology
-                </Typography>
-                <Typography
-                    variant="body1"
-                    sx={{
-                        maxWidth: 800,
-                        mx: 'auto',
-                        mb: 6,
-                        color: 'text.secondary',
-                        fontSize: '1.1rem',
-                        lineHeight: 1.7,
-                    }}
-                >
-                    At the core of Creevo is our proprietary AI system that understands game mechanics,
-                    visual design, and player experience. Our internal tools can generate playable demos
-                    from conceptual descriptions, dramatically reducing the time from idea to prototype.
-                </Typography>
-
-                <Box
-                    sx={{
-                        p: 6,
-                        borderRadius: 4,
-                        background: 'linear-gradient(135deg, rgba(139,92,246,0.10) 0%, rgba(6,182,212,0.10) 100%)',
-                        border: '1px solid rgba(139,92,246,0.15)',
-                        boxShadow: '0 8px 32px rgba(139,92,246,0.15)',
-                    }}
-                >
-                    <Typography
-                        variant="h5"
-                        sx={{ mb: 3, fontWeight: 600, color: 'text.primary' }}
-                    >
-                        AI-Driven Game Development Pipeline
-                    </Typography>
-                    <Typography
-                        variant="body1"
-                        sx={{ color: 'text.secondary', maxWidth: 600, mx: 'auto', lineHeight: 1.6 }}
-                    >
-                        Our platform bridges the gap between creative vision and technical implementation,
-                        enabling game ideators, designers, and artists to create interactive prototypes
-                        without extensive programming knowledge.
-                    </Typography>
-                </Box>
-            </Box>
-
-            {/* Team Section */}
-            <Box
-                id="team-section"
-                sx={{ textAlign: 'center', mb: 16 }}
-            >
-                <Typography variant="h2" sx={{ mb: 4, color: 'text.primary' }}>
-                    World-Class AI Team
-                </Typography>
-                <Typography
-                    variant="body1"
-                    sx={{
-                        maxWidth: 700,
-                        mx: 'auto',
-                        mb: 6,
-                        color: 'text.secondary',
-                        fontSize: '1.1rem',
-                        lineHeight: 1.7,
-                    }}
-                >
-                    Our founding team brings over 10 years of combined machine learning expertise
-                    from leading tech companies and research institutions.
-                </Typography>
-
-                <Box
-                    sx={{
-                        display: 'grid',
-                        gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' },
-                        gap: 4,
-                        maxWidth: 1000,
-                        mx: 'auto',
-                    }}
-                >
-                    {teamMembers.map((member, index) => (
-                        <Box
-                            key={index}
-                            sx={{
-                                textAlign: 'center',
-                                p: 4,
-                                borderRadius: 3,
-                                background: 'rgba(255, 255, 255, 0.05)',
-                                backdropFilter: 'blur(20px)',
-                                border: '1px solid rgba(255, 255, 255, 0.1)',
-                                transition: 'all 0.3s ease',
-                                '&:hover': {
-                                    transform: 'translateY(-4px)',
-                                    boxShadow: '0 12px 48px rgba(139, 92, 246, 0.15)',
-                                },
-                            }}
-                        >
-                            <Avatar
-                                src={member.avatar}
-                                sx={{
-                                    width: 100,
-                                    height: 100,
-                                    mx: 'auto',
-                                    mb: 3,
-                                    background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
-                                    fontSize: '2rem',
-                                    fontWeight: 600,
-                                    boxShadow: '0 4px 24px rgba(139, 92, 246, 0.3)',
-                                }}
-                            >
-                                {member.name.charAt(0)}
-                            </Avatar>
-                            <Typography
-                                variant="h6"
-                                sx={{ fontWeight: 600, mb: 1, color: 'text.primary' }}
-                            >
-                                {member.name}
-                            </Typography>
-                            <Typography
-                                variant="body2"
-                                sx={{ mb: 1, color: '#8B5CF6', fontWeight: 500 }}
-                            >
-                                {member.role}
-                            </Typography>
-                            <Typography
-                                variant="body2"
-                                sx={{ mb: 2, color: 'text.secondary', opacity: 0.8 }}
-                            >
-                                {member.company}
-                            </Typography>
-                            <Typography
-                                variant="body2"
-                                sx={{ mb: 3, color: 'text.secondary', fontSize: '0.8rem', fontStyle: 'italic' }}
-                            >
-                                {member.expertise}
-                            </Typography>
-                            <Box
-                                sx={{
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    gap: 2,
-                                }}
-                            >
-                                <Link
-                                    href={member.linkedin}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    sx={{ display: 'flex', alignItems: 'center' }}
-                                >
-                                    <LinkedIn sx={{ fontSize: 24, color: '#8B5CF6' }} />
-                                </Link>
-                                <Link
-                                    href={member.github}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    sx={{ display: 'flex', alignItems: 'center' }}
-                                >
-                                    <GitHub sx={{ fontSize: 24, color: '#06B6D4' }} />
-                                </Link>
-                            </Box>
-                        </Box>
-                    ))}
-                </Box>
-            </Box>
-
-            {/* Contact Section */}
-            <Box
-                id="contact-section"
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    textAlign: 'center',
+                    mb: 12,
                     py: 8,
-                    mb: 10,
+                    background: 'linear-gradient(135deg, rgba(139,92,246,0.1) 0%, rgba(6,182,212,0.1) 100%)',
                     borderRadius: 4,
-                    background: 'linear-gradient(135deg, rgba(139,92,246,0.15) 0%, rgba(6,182,212,0.15) 100%)',
                     border: '1px solid rgba(139,92,246,0.2)',
-                    boxShadow: '0 8px 32px rgba(139,92,246,0.15)',
                 }}
             >
-                <Typography variant="h2" sx={{ mb: 3, color: 'text.primary' }}>
-                    Ready to Invest in the Future?
-                </Typography>
                 <Typography
-                    variant="body1"
+                    variant="h1"
+                    sx={{
+                        mb: 3,
+                        background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        fontWeight: 700,
+                    }}
+                >
+                    Turn Your Game Ideas Into Reality
+                </Typography>
+
+                <Typography
+                    variant="h5"
                     sx={{
                         mb: 4,
                         color: 'text.secondary',
-                        maxWidth: 600,
-                        fontSize: '1.1rem',
+                        maxWidth: 800,
+                        mx: 'auto',
+                        fontWeight: 400,
                         lineHeight: 1.6,
                     }}
                 >
-                    Join us in revolutionizing game development. We're looking for strategic investors
-                    who understand the potential of AI in creative industries.
+                    Professional game demos created with AI-powered development and expert human oversight.
+                    From concept to playable prototype in just 2 weeks.
+                </Typography>
+
+                <Stack direction="row" spacing={2} justifyContent="center" sx={{ mb: 4 }}>
+                    <Chip
+                        icon={<RocketLaunch />}
+                        label="2-Week Delivery"
+                        variant="outlined"
+                        sx={{ borderColor: '#8B5CF6', color: '#8B5CF6' }}
+                    />
+                    <Chip
+                        icon={<AutoAwesome />}
+                        label="AI-Powered"
+                        variant="outlined"
+                        sx={{ borderColor: '#06B6D4', color: '#06B6D4' }}
+                    />
+                    <Chip
+                        icon={<Verified />}
+                        label="Quality Guaranteed"
+                        variant="outlined"
+                        sx={{ borderColor: '#10B981', color: '#10B981' }}
+                    />
+                </Stack>
+
+                <Button
+                    variant="contained"
+                    size="large"
+                    href="mailto:amir@creevo.app"
+                    sx={{
+                        px: 6,
+                        py: 2,
+                        fontSize: '1.1rem',
+                        background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
+                        '&:hover': {
+                            background: 'linear-gradient(135deg, #7C3AED 0%, #0891B2 100%)',
+                        }
+                    }}
+                >
+                    Get Started Now
+                </Button>
+            </Box>
+
+            {/* Features Section */}
+            <Box sx={{ mb: 12 }}>
+                <Typography
+                    variant="h2"
+                    sx={{
+                        textAlign: 'center',
+                        mb: 6,
+                        color: 'text.primary',
+                        fontWeight: 600,
+                    }}
+                >
+                    Why Choose Creevo?
+                </Typography>
+
+                <Grid container spacing={4} sx={{ maxWidth: 1200, mx: 'auto' }}>
+                    {features.map((feature, index) => (
+                        <Grid size={{ xs: 12, sm: 6, md: 6, lg: 3 }} key={index}>
+                            <Card
+                                sx={{
+                                    height: '100%',
+                                    p: 3,
+                                    textAlign: 'center',
+                                    background: 'rgba(255,255,255,0.05)',
+                                    backdropFilter: 'blur(10px)',
+                                    border: '1px solid rgba(255,255,255,0.1)',
+                                    transition: 'all 0.3s ease',
+                                    '&:hover': {
+                                        transform: 'translateY(-8px)',
+                                        boxShadow: '0 20px 40px rgba(139,92,246,0.2)',
+                                    },
+                                }}
+                            >
+                                <Box sx={{ mb: 2 }}>
+                                    {feature.icon}
+                                </Box>
+                                <Typography variant="h6" sx={{ mb: 1.5, fontWeight: 600 }}>
+                                    {feature.title}
+                                </Typography>
+                                <Typography variant="body2" sx={{ color: 'text.secondary', lineHeight: 1.6 }}>
+                                    {feature.description}
+                                </Typography>
+                            </Card>
+                        </Grid>
+                    ))}
+                </Grid>
+            </Box>
+
+            {/* How It Works Section */}
+            <Box sx={{ mb: 12 }}>
+                <Typography
+                    variant="h2"
+                    sx={{
+                        textAlign: 'center',
+                        mb: 3,
+                        color: 'text.primary',
+                        fontWeight: 600,
+                    }}
+                >
+                    How It Works
                 </Typography>
 
                 <Typography
                     variant="h6"
                     sx={{
-                        color: 'text.primary',
-                        fontWeight: 500,
-                        fontSize: '1.2rem',
+                        textAlign: 'center',
+                        mb: 8,
+                        color: 'text.secondary',
+                        maxWidth: 600,
+                        mx: 'auto',
+                        fontWeight: 400,
                     }}
                 >
-                    Interested? Get in touch by contacting <span style={{ fontFamily: 'monospace', color: '#8B5CF6' }}>amir at creevo dot com</span>
+                    We combine proprietary AI tooling with top developer talent to deliver
+                    professional-quality game demos quickly and efficiently.
                 </Typography>
+
+                <Grid container spacing={6} sx={{ maxWidth: 1200, mx: 'auto' }}>
+                    {howItWorksSteps.map((step, index) => (
+                        <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
+                            <Paper
+                                elevation={0}
+                                sx={{
+                                    p: 4,
+                                    height: '100%',
+                                    textAlign: 'center',
+                                    background: 'linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(6,182,212,0.05) 100%)',
+                                    border: '1px solid rgba(139,92,246,0.1)',
+                                    borderRadius: 3,
+                                    position: 'relative',
+                                }}
+                            >
+                                <Box
+                                    sx={{
+                                        position: 'absolute',
+                                        top: -15,
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        width: 30,
+                                        height: 30,
+                                        background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
+                                        borderRadius: '50%',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        color: 'white',
+                                        fontSize: '1rem',
+                                        fontWeight: 600,
+                                    }}
+                                >
+                                    {index + 1}
+                                </Box>
+                                <Box sx={{ mb: 3, mt: 2 }}>
+                                    {step.icon}
+                                </Box>
+                                <Typography variant="h5" sx={{ mb: 3, fontWeight: 600 }}>
+                                    {step.title}
+                                </Typography>
+                                <Typography variant="body1" sx={{ color: 'text.secondary', lineHeight: 1.6 }}>
+                                    {step.description}
+                                </Typography>
+                            </Paper>
+                        </Grid>
+                    ))}
+                </Grid>
             </Box>
 
-            {/* Footer */}
+            {/* Pricing Section */}
+            <Box id="pricing" sx={{ mb: 12 }}>
+                <Typography
+                    variant="h2"
+                    sx={{
+                        textAlign: 'center',
+                        mb: 3,
+                        color: 'text.primary',
+                        fontWeight: 600,
+                    }}
+                >
+                    Simple, Transparent Pricing
+                </Typography>
+
+                <Typography
+                    variant="h6"
+                    sx={{
+                        textAlign: 'center',
+                        mb: 8,
+                        color: 'text.secondary',
+                        maxWidth: 600,
+                        mx: 'auto',
+                        fontWeight: 400,
+                    }}
+                >
+                    Choose the package that fits your project needs. From basic demos to complete packages with art and marketing support.
+                </Typography>
+
+                <Grid container spacing={4} sx={{ maxWidth: 1200, mx: 'auto' }}>
+                    {pricingTiers.map((tier, index) => (
+                        <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
+                            <Card
+                                sx={{
+                                    height: '100%',
+                                    position: 'relative',
+                                    border: tier.popular ? '2px solid #8B5CF6' : '1px solid rgba(255,255,255,0.1)',
+                                    background: tier.popular
+                                        ? 'linear-gradient(135deg, rgba(139,92,246,0.1) 0%, rgba(6,182,212,0.1) 100%)'
+                                        : 'rgba(255,255,255,0.05)',
+                                    backdropFilter: 'blur(10px)',
+                                    transition: 'all 0.3s ease',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    '&:hover': {
+                                        transform: 'translateY(-8px)',
+                                        boxShadow: tier.popular
+                                            ? '0 20px 40px rgba(139,92,246,0.3)'
+                                            : '0 20px 40px rgba(0,0,0,0.2)',
+                                    },
+                                }}
+                            >
+                                {tier.popular && (
+                                    <Box
+                                        sx={{
+                                            position: 'absolute',
+                                            top: -1,
+                                            left: '50%',
+                                            transform: 'translateX(-50%)',
+                                            background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
+                                            color: 'white',
+                                            px: 3,
+                                            py: 1,
+                                            borderRadius: '0 0 8px 8px',
+                                            fontSize: '0.8rem',
+                                            fontWeight: 600,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: 0.5,
+                                        }}
+                                    >
+                                        <StarRate sx={{ fontSize: 16 }} />
+                                        MOST POPULAR
+                                    </Box>
+                                )}
+
+                                <CardContent sx={{ p: 4, textAlign: 'center', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                                    <Box sx={{ flexGrow: 1 }}>
+                                        <Typography variant="h5" sx={{ mb: 2, fontWeight: 600 }}>
+                                            {tier.name}
+                                        </Typography>
+
+                                        <Box sx={{ mb: 2 }}>
+                                            <Typography
+                                                variant="h3"
+                                                sx={{
+                                                    fontWeight: 700,
+                                                    color: tier.popular ? '#8B5CF6' : 'text.primary',
+                                                }}
+                                            >
+                                                {tier.price}
+                                            </Typography>
+                                            {tier.originalPrice && (
+                                                <Typography
+                                                    variant="body2"
+                                                    sx={{
+                                                        textDecoration: 'line-through',
+                                                        color: 'text.secondary',
+                                                        mt: 1,
+                                                    }}
+                                                >
+                                                    {tier.originalPrice}
+                                                </Typography>
+                                            )}
+                                            {tier.discount && (
+                                                <Chip
+                                                    label={`Save ${tier.discount}`}
+                                                    size="small"
+                                                    sx={{
+                                                        mt: 1,
+                                                        background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                                                        color: 'white',
+                                                    }}
+                                                />
+                                            )}
+                                        </Box>
+
+                                        <Typography variant="body1" sx={{ mb: 4, color: 'text.secondary' }}>
+                                            Professional Game Demo
+                                        </Typography>
+
+                                        <Divider sx={{ mb: 4, borderColor: 'rgba(255,255,255,0.1)' }} />
+
+                                        <List sx={{ p: 0 }}>
+                                            {tier.features.map((feature, featureIndex) => (
+                                                <ListItem key={featureIndex} sx={{ px: 0, py: 0.5 }}>
+                                                    <ListItemIcon sx={{ minWidth: 32 }}>
+                                                        <Check sx={{ fontSize: 20, color: '#10B981' }} />
+                                                    </ListItemIcon>
+                                                    <ListItemText
+                                                        primary={feature}
+                                                        primaryTypographyProps={{
+                                                            variant: 'body2',
+                                                            color: 'text.secondary',
+                                                        }}
+                                                    />
+                                                </ListItem>
+                                            ))}
+                                        </List>
+                                    </Box>
+
+                                    <Button
+                                        variant={tier.popular ? 'contained' : 'outlined'}
+                                        fullWidth
+                                        size="large"
+                                        href="mailto:amir@creevo.app"
+                                        sx={{
+                                            mt: 4,
+                                            py: 2,
+                                            fontSize: '1rem',
+                                            fontWeight: 600,
+                                            ...(tier.popular && {
+                                                background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
+                                                '&:hover': {
+                                                    background: 'linear-gradient(135deg, #7C3AED 0%, #0891B2 100%)',
+                                                },
+                                            }),
+                                        }}
+                                    >
+                                        Get Started
+                                    </Button>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    ))}
+                </Grid>
+            </Box>
+
+            {/* CTA Section */}
             <Box
-                component="footer"
                 sx={{
-                    mt: 8,
-                    py: 3,
-                    borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-                    display: 'flex',
-                    flexDirection: { xs: 'column', sm: 'row' },
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: 3,
-                    color: 'rgba(255,255,255,0.7)',
+                    textAlign: 'center',
+                    py: 8,
+                    background: 'linear-gradient(135deg, rgba(139,92,246,0.15) 0%, rgba(6,182,212,0.15) 100%)',
+                    borderRadius: 4,
+                    border: '1px solid rgba(139,92,246,0.2)',
                 }}
             >
-                <Typography variant="body2" sx={{ fontSize: '1rem', fontWeight: 500 }}>
-                    © {new Date().getFullYear()} Creevo. All rights reserved.
+                <Typography variant="h3" sx={{ mb: 3, fontWeight: 600 }}>
+                    Ready to Bring Your Game to Life?
                 </Typography>
-                <Typography variant="body2" sx={{ fontSize: '0.9rem' }}>
-                    Investor Relations • amir at creevo dot com
+                <Typography
+                    variant="h6"
+                    sx={{
+                        mb: 4,
+                        color: 'text.secondary',
+                        maxWidth: 600,
+                        mx: 'auto',
+                        fontWeight: 400,
+                    }}
+                >
+                    Join hundreds of game creators who've turned their ideas into playable demos.
+                    Start your project today and see results in just 2 weeks.
                 </Typography>
+
+                <Button
+                    variant="contained"
+                    size="large"
+                    startIcon={<RocketLaunch />}
+                    href="mailto:amir@creevo.app"
+                    sx={{
+                        px: 6,
+                        py: 2,
+                        fontSize: '1.1rem',
+                        background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
+                        '&:hover': {
+                            background: 'linear-gradient(135deg, #7C3AED 0%, #0891B2 100%)',
+                        }
+                    }}
+                >
+                    Start Your Demo
+                </Button>
             </Box>
         </Container>
     );

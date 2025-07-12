@@ -9,6 +9,7 @@ import {
   Button,
   MenuItem,
 } from '@mui/material';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const pages = [
   { name: 'About', id: 'about-section' },
@@ -17,6 +18,8 @@ const pages = [
 ];
 
 export const NavBar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -26,11 +29,84 @@ export const NavBar = () => {
   };
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    // If we're not on the home page, navigate to home first
+    if (location.pathname !== '/') {
+      navigate('/', { replace: true });
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // We're already on the home page, just scroll
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
+
+  const handleLogoClick = () => {
+    if (location.pathname !== '/') {
+      navigate('/', { replace: true });
+    } else {
+      scrollToSection('hero-section');
+    }
+  };
+
+  // If we're on the invest page, show simplified navbar
+  if (location.pathname === '/invest') {
+    return (
+      <Box
+        sx={{ display: 'flex', justifyContent: 'center', marginBottom: '40px' }}
+      >
+        <AppBar
+          position="static"
+          sx={{
+            backgroundColor: '#f6e0f5',
+            color: '#35317c',
+            width: '75%',
+            display: 'flex',
+            borderRadius: '25px',
+            boxShadow: '0 0 5px 1px #e79fe0',
+          }}
+        >
+          <Container maxWidth="xl">
+            <Toolbar disableGutters sx={{ justifyContent: 'center' }}>
+              <Box
+                component="img"
+                src={'/creevo-logo.png'}
+                onClick={() => navigate('/', { replace: true })}
+                sx={{
+                  height: '64px',
+                  marginRight: '8px',
+                  ':hover': { cursor: 'pointer' },
+                }}
+              />
+              <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                onClick={() => navigate('/', { replace: true })}
+                sx={{
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.3rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                }}
+              >
+                CREEVO
+              </Typography>
+            </Toolbar>
+          </Container>
+        </AppBar>
+      </Box>
+    );
+  }
 
   return (
     <Box
@@ -52,7 +128,7 @@ export const NavBar = () => {
             <Box
               component="img"
               src={'/creevo-logo.png'}
-              onClick={() => scrollToSection('hero-section')}
+              onClick={handleLogoClick}
               sx={{
                 height: '64px',
                 marginRight: '8px',
@@ -63,7 +139,7 @@ export const NavBar = () => {
               variant="h6"
               noWrap
               component="a"
-              onClick={() => scrollToSection('hero-section')}
+              onClick={handleLogoClick}
               sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },
@@ -112,7 +188,7 @@ export const NavBar = () => {
               variant="h5"
               noWrap
               component="a"
-              onClick={() => scrollToSection('hero-section')}
+              onClick={handleLogoClick}
               sx={{
                 mr: 2,
                 display: { xs: 'flex', md: 'none' },
