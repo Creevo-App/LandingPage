@@ -26,61 +26,60 @@ import {
     Check,
     StarRate,
     Groups,
-    Build,
 } from '@mui/icons-material';
 
 export const Invest = () => {
     const pricingTiers = [
         {
-            name: 'Single Demo',
+            name: 'Basic Demo',
             price: '$300',
             originalPrice: null,
             discount: null,
             demos: 1,
             popular: false,
             features: [
-                'One high-quality playable demo',
-                'AI-generated boilerplate code',
-                'Human developer oversight',
-                'Quality assurance testing',
+                '1.5-2 minute demo video',
+                '5-10 minute playable demo',
                 'Source code delivered',
+                'Full quality assurance testing',
+                'Money Back Guarantee',
                 '2-week turnaround',
             ],
         },
         {
-            name: 'Starter Pack',
-            price: '$850',
-            originalPrice: '$900',
-            discount: '5%',
-            demos: 3,
+            name: 'Enhanced Demo',
+            price: '$500',
+            originalPrice: null,
+            discount: null,
+            demos: 1,
             popular: true,
             features: [
-                'Three high-quality playable demos',
-                'AI-generated boilerplate code',
-                'Human developer oversight',
-                'Quality assurance testing',
+                '15-20 minutes of playable content',
+                'Limited art asset creation (Done by an in house digital artist, never AI)',
                 'Source code delivered',
-                '2-week turnaround per demo',
+                'Full quality assurance testing',
+                'Money Back Guarantee',
+                '2-week turnaround',
                 'Priority support',
             ],
         },
         {
-            name: 'Pro Bundle',
-            price: '$1,500',
-            originalPrice: '$1,800',
-            discount: '17%',
-            demos: 6,
+            name: 'Complete Package',
+            price: '$1,000',
+            originalPrice: null,
+            discount: null,
+            demos: 1,
             popular: false,
             features: [
-                'Six high-quality playable demos',
-                'AI-generated boilerplate code',
-                'Human developer oversight',
-                'Quality assurance testing',
+                '15-20 minutes of playable content',
+                'Complete art asset generation',
+                'Basic marketing support',
+                'Kickstarter page assistance',
+                'Full quality assurance testing',
                 'Source code delivered',
-                '2-week turnaround per demo',
+                'Money Back Guarantee',
+                '2-week turnaround',
                 'Priority support',
-                'Dedicated project manager',
-                'Monthly progress calls',
             ],
         },
     ];
@@ -98,8 +97,8 @@ export const Invest = () => {
         },
         {
             icon: <Verified sx={{ fontSize: 48, color: '#10B981' }} />,
-            title: 'Quality Assurance',
-            description: 'Our human developers verify that every demo meets our strict quality standards, ensuring smooth gameplay, polished features, and professional-grade deliverables.',
+            title: '100% Quality Guarantee',
+            description: 'Our human developers verify that every demo meets our strict quality standards, ensuring smooth gameplay, polished features, and professional-grade deliverables. Whatever your game needs, we will make it happen. If for whatever reason you are not satisfied with the demo, we will refund 100% of your money within 24 hours.',
         },
     ];
 
@@ -139,10 +138,10 @@ export const Invest = () => {
                     border: '1px solid rgba(139,92,246,0.2)',
                 }}
             >
-                <Typography 
-                    variant="h1" 
-                    sx={{ 
-                        mb: 3, 
+                <Typography
+                    variant="h1"
+                    sx={{
+                        mb: 3,
                         background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
@@ -151,7 +150,7 @@ export const Invest = () => {
                 >
                     Turn Your Game Ideas Into Reality
                 </Typography>
-                
+
                 <Typography
                     variant="h5"
                     sx={{
@@ -163,26 +162,26 @@ export const Invest = () => {
                         lineHeight: 1.6,
                     }}
                 >
-                    Professional game demos created with AI-powered development and expert human oversight. 
+                    Professional game demos created with AI-powered development and expert human oversight.
                     From concept to playable prototype in just 2 weeks.
                 </Typography>
 
                 <Stack direction="row" spacing={2} justifyContent="center" sx={{ mb: 4 }}>
-                    <Chip 
-                        icon={<RocketLaunch />} 
-                        label="2-Week Delivery" 
+                    <Chip
+                        icon={<RocketLaunch />}
+                        label="2-Week Delivery"
                         variant="outlined"
                         sx={{ borderColor: '#8B5CF6', color: '#8B5CF6' }}
                     />
-                    <Chip 
-                        icon={<AutoAwesome />} 
-                        label="AI-Powered" 
+                    <Chip
+                        icon={<AutoAwesome />}
+                        label="AI-Powered"
                         variant="outlined"
                         sx={{ borderColor: '#06B6D4', color: '#06B6D4' }}
                     />
-                    <Chip 
-                        icon={<Verified />} 
-                        label="Quality Guaranteed" 
+                    <Chip
+                        icon={<Verified />}
+                        label="Quality Guaranteed"
                         variant="outlined"
                         sx={{ borderColor: '#10B981', color: '#10B981' }}
                     />
@@ -191,9 +190,9 @@ export const Invest = () => {
                 <Button
                     variant="contained"
                     size="large"
-                    href="#pricing"
-                    sx={{ 
-                        px: 6, 
+                    href="mailto:amir@creevo.app"
+                    sx={{
+                        px: 6,
                         py: 2,
                         fontSize: '1.1rem',
                         background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
@@ -208,10 +207,10 @@ export const Invest = () => {
 
             {/* Features Section */}
             <Box sx={{ mb: 12 }}>
-                <Typography 
-                    variant="h2" 
-                    sx={{ 
-                        textAlign: 'center', 
+                <Typography
+                    variant="h2"
+                    sx={{
+                        textAlign: 'center',
                         mb: 6,
                         color: 'text.primary',
                         fontWeight: 600,
@@ -219,10 +218,10 @@ export const Invest = () => {
                 >
                     Why Choose Creevo?
                 </Typography>
-                
-                <Grid container spacing={4}>
+
+                <Grid container spacing={4} sx={{ maxWidth: 1200, mx: 'auto' }}>
                     {features.map((feature, index) => (
-                        <Grid item xs={12} sm={6} md={3} key={index}>
+                        <Grid size={{ xs: 12, sm: 6, md: 6, lg: 3 }} key={index}>
                             <Card
                                 sx={{
                                     height: '100%',
@@ -241,10 +240,10 @@ export const Invest = () => {
                                 <Box sx={{ mb: 2 }}>
                                     {feature.icon}
                                 </Box>
-                                <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+                                <Typography variant="h6" sx={{ mb: 1.5, fontWeight: 600 }}>
                                     {feature.title}
                                 </Typography>
-                                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                                <Typography variant="body2" sx={{ color: 'text.secondary', lineHeight: 1.6 }}>
                                     {feature.description}
                                 </Typography>
                             </Card>
@@ -255,10 +254,10 @@ export const Invest = () => {
 
             {/* How It Works Section */}
             <Box sx={{ mb: 12 }}>
-                <Typography 
-                    variant="h2" 
-                    sx={{ 
-                        textAlign: 'center', 
+                <Typography
+                    variant="h2"
+                    sx={{
+                        textAlign: 'center',
                         mb: 3,
                         color: 'text.primary',
                         fontWeight: 600,
@@ -266,7 +265,7 @@ export const Invest = () => {
                 >
                     How It Works
                 </Typography>
-                
+
                 <Typography
                     variant="h6"
                     sx={{
@@ -278,13 +277,13 @@ export const Invest = () => {
                         fontWeight: 400,
                     }}
                 >
-                    We combine proprietary AI tooling with top developer talent to deliver 
+                    We combine proprietary AI tooling with top developer talent to deliver
                     professional-quality game demos quickly and efficiently.
                 </Typography>
 
-                <Grid container spacing={6}>
+                <Grid container spacing={6} sx={{ maxWidth: 1200, mx: 'auto' }}>
                     {howItWorksSteps.map((step, index) => (
-                        <Grid item xs={12} md={4} key={index}>
+                        <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
                             <Paper
                                 elevation={0}
                                 sx={{
@@ -334,10 +333,10 @@ export const Invest = () => {
 
             {/* Pricing Section */}
             <Box id="pricing" sx={{ mb: 12 }}>
-                <Typography 
-                    variant="h2" 
-                    sx={{ 
-                        textAlign: 'center', 
+                <Typography
+                    variant="h2"
+                    sx={{
+                        textAlign: 'center',
                         mb: 3,
                         color: 'text.primary',
                         fontWeight: 600,
@@ -345,7 +344,7 @@ export const Invest = () => {
                 >
                     Simple, Transparent Pricing
                 </Typography>
-                
+
                 <Typography
                     variant="h6"
                     sx={{
@@ -357,25 +356,25 @@ export const Invest = () => {
                         fontWeight: 400,
                     }}
                 >
-                    Choose the package that fits your needs. Save more when you order multiple demos.
+                    Choose the package that fits your project needs. From basic demos to complete packages with art and marketing support.
                 </Typography>
 
-                <Grid container spacing={4} justifyContent="center">
+                <Grid container spacing={4} sx={{ maxWidth: 1200, mx: 'auto' }}>
                     {pricingTiers.map((tier, index) => (
-                        <Grid item xs={12} md={4} key={index}>
+                        <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
                             <Card
                                 sx={{
                                     height: '100%',
                                     position: 'relative',
                                     border: tier.popular ? '2px solid #8B5CF6' : '1px solid rgba(255,255,255,0.1)',
-                                    background: tier.popular 
+                                    background: tier.popular
                                         ? 'linear-gradient(135deg, rgba(139,92,246,0.1) 0%, rgba(6,182,212,0.1) 100%)'
                                         : 'rgba(255,255,255,0.05)',
                                     backdropFilter: 'blur(10px)',
                                     transition: 'all 0.3s ease',
                                     '&:hover': {
                                         transform: 'translateY(-8px)',
-                                        boxShadow: tier.popular 
+                                        boxShadow: tier.popular
                                             ? '0 20px 40px rgba(139,92,246,0.3)'
                                             : '0 20px 40px rgba(0,0,0,0.2)',
                                     },
@@ -404,16 +403,16 @@ export const Invest = () => {
                                         MOST POPULAR
                                     </Box>
                                 )}
-                                
+
                                 <CardContent sx={{ p: 4, textAlign: 'center' }}>
                                     <Typography variant="h5" sx={{ mb: 2, fontWeight: 600 }}>
                                         {tier.name}
                                     </Typography>
-                                    
+
                                     <Box sx={{ mb: 2 }}>
-                                        <Typography 
-                                            variant="h3" 
-                                            sx={{ 
+                                        <Typography
+                                            variant="h3"
+                                            sx={{
                                                 fontWeight: 700,
                                                 color: tier.popular ? '#8B5CF6' : 'text.primary',
                                             }}
@@ -421,9 +420,9 @@ export const Invest = () => {
                                             {tier.price}
                                         </Typography>
                                         {tier.originalPrice && (
-                                            <Typography 
-                                                variant="body2" 
-                                                sx={{ 
+                                            <Typography
+                                                variant="body2"
+                                                sx={{
                                                     textDecoration: 'line-through',
                                                     color: 'text.secondary',
                                                     mt: 1,
@@ -433,10 +432,10 @@ export const Invest = () => {
                                             </Typography>
                                         )}
                                         {tier.discount && (
-                                            <Chip 
+                                            <Chip
                                                 label={`Save ${tier.discount}`}
                                                 size="small"
-                                                sx={{ 
+                                                sx={{
                                                     mt: 1,
                                                     background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
                                                     color: 'white',
@@ -444,20 +443,20 @@ export const Invest = () => {
                                             />
                                         )}
                                     </Box>
-                                    
+
                                     <Typography variant="body1" sx={{ mb: 4, color: 'text.secondary' }}>
-                                        {tier.demos} Professional Demo{tier.demos > 1 ? 's' : ''}
+                                        Professional Game Demo
                                     </Typography>
-                                    
+
                                     <Divider sx={{ mb: 4, borderColor: 'rgba(255,255,255,0.1)' }} />
-                                    
+
                                     <List sx={{ p: 0 }}>
                                         {tier.features.map((feature, featureIndex) => (
                                             <ListItem key={featureIndex} sx={{ px: 0, py: 0.5 }}>
                                                 <ListItemIcon sx={{ minWidth: 32 }}>
                                                     <Check sx={{ fontSize: 20, color: '#10B981' }} />
                                                 </ListItemIcon>
-                                                <ListItemText 
+                                                <ListItemText
                                                     primary={feature}
                                                     primaryTypographyProps={{
                                                         variant: 'body2',
@@ -467,11 +466,12 @@ export const Invest = () => {
                                             </ListItem>
                                         ))}
                                     </List>
-                                    
+
                                     <Button
                                         variant={tier.popular ? 'contained' : 'outlined'}
                                         fullWidth
                                         size="large"
+                                        href="mailto:amir@creevo.app"
                                         sx={{
                                             mt: 4,
                                             py: 2,
@@ -517,47 +517,27 @@ export const Invest = () => {
                         fontWeight: 400,
                     }}
                 >
-                    Join hundreds of game creators who've turned their ideas into playable demos. 
+                    Join hundreds of game creators who've turned their ideas into playable demos.
                     Start your project today and see results in just 2 weeks.
                 </Typography>
-                
-                <Stack direction="row" spacing={3} justifyContent="center">
-                    <Button
-                        variant="contained"
-                        size="large"
-                        startIcon={<RocketLaunch />}
-                        sx={{
-                            px: 6,
-                            py: 2,
-                            fontSize: '1.1rem',
-                            background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
-                            '&:hover': {
-                                background: 'linear-gradient(135deg, #7C3AED 0%, #0891B2 100%)',
-                            }
-                        }}
-                    >
-                        Start Your Demo
-                    </Button>
-                    <Button
-                        variant="outlined"
-                        size="large"
-                        startIcon={<Build />}
-                        sx={{
-                            px: 6,
-                            py: 2,
-                            fontSize: '1.1rem',
-                            borderColor: '#8B5CF6',
-                            color: '#8B5CF6',
-                            '&:hover': {
-                                borderColor: '#7C3AED',
-                                color: '#7C3AED',
-                                background: 'rgba(139,92,246,0.1)',
-                            }
-                        }}
-                    >
-                        Learn More
-                    </Button>
-                </Stack>
+
+                <Button
+                    variant="contained"
+                    size="large"
+                    startIcon={<RocketLaunch />}
+                    href="mailto:amir@creevo.app"
+                    sx={{
+                        px: 6,
+                        py: 2,
+                        fontSize: '1.1rem',
+                        background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
+                        '&:hover': {
+                            background: 'linear-gradient(135deg, #7C3AED 0%, #0891B2 100%)',
+                        }
+                    }}
+                >
+                    Start Your Demo
+                </Button>
             </Box>
         </Container>
     );

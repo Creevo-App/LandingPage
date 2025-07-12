@@ -9,6 +9,7 @@ import {
   Button,
   MenuItem,
 } from '@mui/material';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const pages = [
   { name: 'About', id: 'about-section' },
@@ -17,6 +18,8 @@ const pages = [
 ];
 
 export const NavBar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -26,9 +29,30 @@ export const NavBar = () => {
   };
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    // If we're not on the home page, navigate to home first
+    if (location.pathname !== '/') {
+      navigate('/', { replace: true });
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // We're already on the home page, just scroll
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  const handleLogoClick = () => {
+    if (location.pathname !== '/') {
+      navigate('/', { replace: true });
+    } else {
+      scrollToSection('hero-section');
     }
   };
 
@@ -52,7 +76,7 @@ export const NavBar = () => {
             <Box
               component="img"
               src={'/creevo-logo.png'}
-              onClick={() => scrollToSection('hero-section')}
+              onClick={handleLogoClick}
               sx={{
                 height: '64px',
                 marginRight: '8px',
@@ -63,7 +87,7 @@ export const NavBar = () => {
               variant="h6"
               noWrap
               component="a"
-              onClick={() => scrollToSection('hero-section')}
+              onClick={handleLogoClick}
               sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },
@@ -112,7 +136,7 @@ export const NavBar = () => {
               variant="h5"
               noWrap
               component="a"
-              onClick={() => scrollToSection('hero-section')}
+              onClick={handleLogoClick}
               sx={{
                 mr: 2,
                 display: { xs: 'flex', md: 'none' },
