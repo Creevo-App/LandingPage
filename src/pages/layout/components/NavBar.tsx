@@ -56,6 +56,58 @@ export const NavBar = () => {
     }
   };
 
+  // If we're on the invest page, show simplified navbar
+  if (location.pathname === '/invest') {
+    return (
+      <Box
+        sx={{ display: 'flex', justifyContent: 'center', marginBottom: '40px' }}
+      >
+        <AppBar
+          position="static"
+          sx={{
+            backgroundColor: '#f6e0f5',
+            color: '#35317c',
+            width: '75%',
+            display: 'flex',
+            borderRadius: '25px',
+            boxShadow: '0 0 5px 1px #e79fe0',
+          }}
+        >
+          <Container maxWidth="xl">
+            <Toolbar disableGutters sx={{ justifyContent: 'center' }}>
+              <Box
+                component="img"
+                src={'/creevo-logo.png'}
+                onClick={() => navigate('/', { replace: true })}
+                sx={{
+                  height: '64px',
+                  marginRight: '8px',
+                  ':hover': { cursor: 'pointer' },
+                }}
+              />
+              <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                onClick={() => navigate('/', { replace: true })}
+                sx={{
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.3rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                }}
+              >
+                CREEVO
+              </Typography>
+            </Toolbar>
+          </Container>
+        </AppBar>
+      </Box>
+    );
+  }
+
   return (
     <Box
       sx={{ display: 'flex', justifyContent: 'center', marginBottom: '40px' }}

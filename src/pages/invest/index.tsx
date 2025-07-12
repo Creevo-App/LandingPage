@@ -372,6 +372,8 @@ export const Invest = () => {
                                         : 'rgba(255,255,255,0.05)',
                                     backdropFilter: 'blur(10px)',
                                     transition: 'all 0.3s ease',
+                                    display: 'flex',
+                                    flexDirection: 'column',
                                     '&:hover': {
                                         transform: 'translateY(-8px)',
                                         boxShadow: tier.popular
@@ -404,68 +406,70 @@ export const Invest = () => {
                                     </Box>
                                 )}
 
-                                <CardContent sx={{ p: 4, textAlign: 'center' }}>
-                                    <Typography variant="h5" sx={{ mb: 2, fontWeight: 600 }}>
-                                        {tier.name}
-                                    </Typography>
-
-                                    <Box sx={{ mb: 2 }}>
-                                        <Typography
-                                            variant="h3"
-                                            sx={{
-                                                fontWeight: 700,
-                                                color: tier.popular ? '#8B5CF6' : 'text.primary',
-                                            }}
-                                        >
-                                            {tier.price}
+                                <CardContent sx={{ p: 4, textAlign: 'center', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                                    <Box sx={{ flexGrow: 1 }}>
+                                        <Typography variant="h5" sx={{ mb: 2, fontWeight: 600 }}>
+                                            {tier.name}
                                         </Typography>
-                                        {tier.originalPrice && (
+
+                                        <Box sx={{ mb: 2 }}>
                                             <Typography
-                                                variant="body2"
+                                                variant="h3"
                                                 sx={{
-                                                    textDecoration: 'line-through',
-                                                    color: 'text.secondary',
-                                                    mt: 1,
+                                                    fontWeight: 700,
+                                                    color: tier.popular ? '#8B5CF6' : 'text.primary',
                                                 }}
                                             >
-                                                {tier.originalPrice}
+                                                {tier.price}
                                             </Typography>
-                                        )}
-                                        {tier.discount && (
-                                            <Chip
-                                                label={`Save ${tier.discount}`}
-                                                size="small"
-                                                sx={{
-                                                    mt: 1,
-                                                    background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
-                                                    color: 'white',
-                                                }}
-                                            />
-                                        )}
-                                    </Box>
-
-                                    <Typography variant="body1" sx={{ mb: 4, color: 'text.secondary' }}>
-                                        Professional Game Demo
-                                    </Typography>
-
-                                    <Divider sx={{ mb: 4, borderColor: 'rgba(255,255,255,0.1)' }} />
-
-                                    <List sx={{ p: 0 }}>
-                                        {tier.features.map((feature, featureIndex) => (
-                                            <ListItem key={featureIndex} sx={{ px: 0, py: 0.5 }}>
-                                                <ListItemIcon sx={{ minWidth: 32 }}>
-                                                    <Check sx={{ fontSize: 20, color: '#10B981' }} />
-                                                </ListItemIcon>
-                                                <ListItemText
-                                                    primary={feature}
-                                                    primaryTypographyProps={{
-                                                        variant: 'body2',
+                                            {tier.originalPrice && (
+                                                <Typography
+                                                    variant="body2"
+                                                    sx={{
+                                                        textDecoration: 'line-through',
                                                         color: 'text.secondary',
+                                                        mt: 1,
+                                                    }}
+                                                >
+                                                    {tier.originalPrice}
+                                                </Typography>
+                                            )}
+                                            {tier.discount && (
+                                                <Chip
+                                                    label={`Save ${tier.discount}`}
+                                                    size="small"
+                                                    sx={{
+                                                        mt: 1,
+                                                        background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                                                        color: 'white',
                                                     }}
                                                 />
-                                            </ListItem>
-                                        ))}
-                                    </List>
+                                            )}
+                                        </Box>
+
+                                        <Typography variant="body1" sx={{ mb: 4, color: 'text.secondary' }}>
+                                            Professional Game Demo
+                                        </Typography>
+
+                                        <Divider sx={{ mb: 4, borderColor: 'rgba(255,255,255,0.1)' }} />
+
+                                        <List sx={{ p: 0 }}>
+                                            {tier.features.map((feature, featureIndex) => (
+                                                <ListItem key={featureIndex} sx={{ px: 0, py: 0.5 }}>
+                                                    <ListItemIcon sx={{ minWidth: 32 }}>
+                                                        <Check sx={{ fontSize: 20, color: '#10B981' }} />
+                                                    </ListItemIcon>
+                                                    <ListItemText
+                                                        primary={feature}
+                                                        primaryTypographyProps={{
+                                                            variant: 'body2',
+                                                            color: 'text.secondary',
+                                                        }}
+                                                    />
+                                                </ListItem>
+                                            ))}
+                                        </List>
+                                    </Box>
 
                                     <Button
                                         variant={tier.popular ? 'contained' : 'outlined'}
