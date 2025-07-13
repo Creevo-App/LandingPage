@@ -9,38 +9,37 @@ import {
 } from '@mui/material';
 import { Bolt } from '@mui/icons-material';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
-// import { useState } from 'react';
-// import { addEmailToWaitlist } from '../../services/waitlistService';
+import { useState } from 'react';
+import { addEmailToWaitlist } from '../../services/waitlistService';
 
 export const Landing = () => {
-  // TODO: Uncomment this when the waitlist is ready
-  // const [email, setEmail] = useState('');
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [message, setMessage] = useState('');
+  const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState('');
 
-  // const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setEmail(event.target.value);
-  // };
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
 
-  // const handleJoinWaitlist = async () => {
-  //   if (!email || !email.includes('@')) {
-  //     setMessage('Please enter a valid email address');
-  //     return;
-  //   }
+  const handleJoinWaitlist = async () => {
+    if (!email || !email.includes('@')) {
+      setMessage('Please enter a valid email address');
+      return;
+    }
 
-  //   setIsLoading(true);
-  //   setMessage('');
+    setIsLoading(true);
+    setMessage('');
 
-  //   try {
-  //     await addEmailToWaitlist(email);
-  //     setMessage('Successfully joined the waitlist!');
-  //     setEmail('');
-  //   } catch (error) {
-  //     setMessage(error instanceof Error ? error.message : 'Network error. Please try again.');
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
+    try {
+      const response = await addEmailToWaitlist(email);
+      setMessage(response.message);
+      setEmail('');
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : 'Network error. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const teamMembers = [
     {
@@ -123,34 +122,30 @@ export const Landing = () => {
             label="Enter your email"
             variant="outlined"
             type="email"
-            // TODO: Uncomment this when the waitlist is ready
-            // value={email}
-            // onChange={handleEmailChange}
+            value={email}
+            onChange={handleEmailChange}
             fullWidth
             sx={{ minWidth: 300 }}
           />
-          <Button 
-            variant="contained" 
-            // TODO: Uncomment this when the waitlist is ready
-            // onClick={handleJoinWaitlist}
-            // disabled={isLoading}
+          <Button
+            variant="contained"
+            onClick={handleJoinWaitlist}
+            disabled={isLoading}
           >
-            {/* {isLoading ? 'Joining...' : 'Join'} */}
-            Join
+            {isLoading ? 'Joining...' : 'Join'}
           </Button>
         </Box>
-        {/* // TODO: Uncomment this when the waitlist is ready */}
-        {/* {message && (
-          <Typography 
-            variant="body2" 
-            sx={{ 
-              mt: 2, 
-              color: message.includes('Successfully') ? 'success.main' : 'error.main' 
+        {message && (
+          <Typography
+            variant="body2"
+            sx={{
+              mt: 2,
+              color: message.includes('Successfully') ? 'success.main' : 'error.main'
             }}
           >
             {message}
           </Typography>
-        )} */}
+        )}
       </Box>
 
       {/* About Us Section */}
@@ -565,11 +560,11 @@ export const Landing = () => {
             fullWidth
             sx={{ minWidth: 220 }}
           />
-          <Button 
-            variant="contained" 
-            size="large" 
-            // onClick={handleJoinWaitlist}
-            // disabled={isLoading}
+          <Button
+            variant="contained"
+            size="large"
+          // onClick={handleJoinWaitlist}
+          // disabled={isLoading}
           >
             {/* {isLoading ? 'Joining...' : 'Join'} */}
             Join
