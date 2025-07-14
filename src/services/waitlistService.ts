@@ -1,4 +1,6 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
+// Base URL for the waitlist API. When deployed to Firebase Hosting the
+// `/api` path is rewritten to the Cloud Function.
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 export interface WaitlistResponse {
   success: boolean;
