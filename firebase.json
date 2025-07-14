@@ -31,6 +31,10 @@
     ],
     "rewrites": [
       {
+        "source": "/api/**",
+        "function": "waitlist"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
