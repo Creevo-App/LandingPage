@@ -20,6 +20,7 @@ if (process.env.FUNCTIONS_EMULATOR === 'true') {
 }
 
 // Save emails to the "waitlist" collection while rate limiting by IP.
+// Force redeploy
 export const waitlist = onRequest({ cors: true }, async (request, response) => {
   // Only allow POST requests
   if (request.method !== 'POST') {
