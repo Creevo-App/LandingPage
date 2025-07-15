@@ -7,6 +7,18 @@ if (!admin.apps.length) {
   admin.initializeApp();
 }
 
+// Initialize Firestore with emulator support
+const db = admin.firestore();
+
+// Check if we're running in the emulator
+if (process.env.FUNCTIONS_EMULATOR === 'true') {
+  // Set Firestore to use emulator
+  db.settings({
+    host: 'localhost:8080',
+    ssl: false
+  });
+}
+
 // Save emails to the "waitlist" collection while rate limiting by IP.
 export const waitlist = onRequest({ cors: true }, async (request, response) => {
   // Only allow POST requests
@@ -22,8 +34,6 @@ export const waitlist = onRequest({ cors: true }, async (request, response) => {
     response.status(400).json({ error: 'Valid email is required' });
     return;
   }
-
-  const db = admin.firestore();
 
   // Determine client IP address
   const ipHeader =
