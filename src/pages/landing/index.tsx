@@ -131,7 +131,7 @@ function Pricing() {
               We're currently in private alpha, so all prototypes are free. Once we launch, we expect to charge about <strong>$50</strong> for an average feature prototype, sometimes a little more or a little less depending on task complexity.
             </p>
             <div className="pricing-guarantee">
-              <p>There's no charge if the AI is unable to complete the task and you don't want to loop in a Creevo Developer.</p>
+              <p>If we can't complete your prototype then no charge</p>
             </div>
           </div>
         </div>
