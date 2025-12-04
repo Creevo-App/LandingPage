@@ -1,683 +1,230 @@
-import {
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Avatar,
-  Container,
-  Link,
-} from '@mui/material';
-import { Bolt } from '@mui/icons-material';
-import EventAvailableIcon from '@mui/icons-material/EventAvailable';
-import { useState } from 'react';
-import { addEmailToWaitlist } from '../../services/waitlistService';
+import { useState } from 'react'
+import './LandingPage.css'
 
-export const Landing = () => {
-  const [email, setEmail] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState('');
+function LandingPage() {
+  return (
+    <div className="landing-page">
+      <Header />
+      <Hero />
+      <WhyUs />
+      <Features />
+      <Pricing />
+      <FAQ />
+      <Contact />
+      <Footer />
+    </div>
+  )
+}
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
+function Header() {
+  return (
+    <header className="header">
+      <div className="header-content">
+        <img src="/assets/logo.png" alt="Creevo" className="header-logo" />
+        <span className="header-text">Creevo</span>
+      </div>
+    </header>
+  )
+}
 
-  const handleJoinWaitlist = async () => {
-    if (!email || !email.includes('@')) {
-      setMessage('Please enter a valid email address');
-      return;
-    }
+function Hero() {
+  return (
+    <section className="hero">
+      <div className="hero-content">
+        <h1 className="hero-title">
+          Never miscommunicate about a feature again
+        </h1>
+        <p className="hero-subtitle">
+          Our product quickly prototypes initial versions of features with disposable code.
+        </p>
+        <div className="hero-cta-wrapper">
+          <div className="hero-badge">
+            <span>We're in private alpha</span>
+            <span className="arrow">→</span>
+          </div>
+          <a href="mailto:mikil@creevo.app" className="cta-button">
+            Request Access
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}
 
-    setIsLoading(true);
-    setMessage('');
+function WhyUs() {
+  return (
+    <section className="why-us">
+      <div className="container">
+        <h2 className="section-title">Why Creevo?</h2>
+        <p className="section-intro">
+          Built specifically for game developers, Creevo uses custom software to eliminate
+          the friction that plagues traditional AI tools.
+        </p>
+      </div>
+    </section>
+  )
+}
 
-    try {
-      await addEmailToWaitlist(email);
-      setMessage('Successfully joined the waitlist!');
-      setEmail('');
-    } catch (error) {
-      setMessage(
-        error instanceof Error ? error.message : 'Network error. Please try again.',
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const teamMembers = [
+function Features() {
+  const features = [
     {
-      name: 'Amir Tarkian',
-      // education: 'Business Development Lead',
-      role: 'Technical Producer & Developer Outreach',
-      linkedin: 'https://www.linkedin.com/in/amirtarkian',
-      github: 'https://github.com/amirtarkian',
-      avatar: './amir-headshot.jpeg',
+      title: 'Built on Godot',
+      description: 'Our AI doesn\'t have to reinvent physics and collision code that already exists. It works directly on top of Godot.',
     },
     {
-      name: 'Mia Siner',
-      // education: 'Finance & Operations Lead',
-      role: 'Operations & Pipeline Coordinator',
-      linkedin: 'https://www.linkedin.com/in/miasiner',
-      github: 'https://github.com/miasiner',
-      avatar: './mia-headshot.jpeg',
+      title: 'Virtual Workspace',
+      description: 'Our AI has its own virtual workspace in the cloud. No setup required—we host everything for you.',
     },
     {
-      name: 'Mikil Foss',
-      // education: 'Machine Learning Research Engineer',
-      role: 'Gameplay Systems & Tooling Engineer',
-      linkedin: 'https://www.linkedin.com/in/mikil-foss/',
-      github: 'https://github.com/mikilfoss',
-      avatar: './mikil-headshot.jpeg',
+      title: 'Cloud Hosting',
+      description: 'We host your game in the cloud so you can quickly iterate on prototypes. Make tweaks or give the AI more context without delays.',
     },
     {
-      name: 'Owen Ratgen',
-      // education: 'Full Stack & Cloud Engineer',
-      role: 'UI/UX & Frontend Systems Developer',
-      linkedin: 'https://www.linkedin.com/in/owen-ratgen',
-      github: 'https://github.com/owenratgen',
-      avatar: './owen-headshot.jpeg',
+      title: 'Shareable Links',
+      description: 'Share your prototype directly with clients. No downloads, no setup—just a link they can click.',
     },
-  ];
+    {
+      title: 'Automated Testing',
+      description: 'Our agent uses the hosting architecture to test your feature multiple times, ensuring it hits specifications before returning.',
+    },
+    {
+      title: 'No Copy-Paste',
+      description: 'Since our agent has its own engine, there\'s no manual copy-paste. Everything flows seamlessly.',
+    },
+    {
+      title: 'Art Asset Integration',
+      description: 'Upload your specific art assets and the agent will integrate them directly into your prototype.',
+    },
+    {
+      title: 'Help no matter what',
+      description: 'If you need extra help or run into frequent issues, our team of experienced game developers is ready to step in to get your prototype wrapped up and ready to show off!',
+    },
+  ]
 
   return (
-    <Container maxWidth="lg" sx={{ py: 10 }}>
-      {/* Hero Section */}
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          textAlign: 'center',
-          gap: 4,
-          minHeight: '60vh',
-          mb: 14,
-          mt: 6,
-        }}
-      >
-        <Box
-          sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}
-        >
-          <Typography variant="h1" sx={{ color: 'text.primary' }}>
-            Welcome to Creevo.app
-          </Typography>
-        </Box>
-
-        <Typography
-          variant="body1"
-          sx={{ maxWidth: 600, mb: 2, color: 'text.secondary' }}
-        >
-          Are you a game developer that needs help with creating a demo? Enter
-          your email below to get in touch with us within 24 hours!
-        </Typography>
-
-        <Box
-          component="form"
-          sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: 2,
-          }}
-        >
-          <TextField
-            id="email-input"
-            label="Enter your email"
-            variant="outlined"
-            type="email"
-            value={email}
-            onChange={handleEmailChange}
-            fullWidth
-            sx={{ minWidth: 300 }}
-          />
-          <Button
-            variant="contained"
-            onClick={handleJoinWaitlist}
-            disabled={isLoading}
-          >
-            {isLoading ? 'Joining...' : 'Join'}
-          </Button>
-        </Box>
-        {message && (
-          <Typography
-            variant="body2"
-            sx={{
-              mt: 2,
-              color: message.includes('Successfully') ? 'success.main' : 'error.main'
-            }}
-          >
-            {message}
-          </Typography>
-        )}
-      </Box>
-
-      {/* About Us Section */}
-      <Box
-        id="about-section"
-        sx={{ textAlign: 'center', mt: 12, mb: 20, py: 4 }}
-      >
-        <Typography variant="h2" sx={{ mb: 4, color: 'text.primary' }}>
-          Meet the Team
-        </Typography>
-        <Typography
-          variant="body1"
-          sx={{
-            maxWidth: 600,
-            mx: 'auto',
-            mb: 6,
-            opacity: 0.8,
-            color: 'text.secondary',
-          }}
-        >
-          Combined experience of 25+ years in the tech industry with a passion
-          for building products to help game developers take their productivity
-          to the next level.
-        </Typography>
-
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: {
-              xs: '1fr',
-              sm: 'repeat(2, 1fr)',
-              md: 'repeat(4, 1fr)',
-            },
-            gap: 4,
-            maxWidth: 1000,
-            mx: 'auto',
-          }}
-        >
-          {teamMembers.map((member, index) => (
-            <Box
-              key={index}
-              sx={{
-                textAlign: 'center',
-                p: 3,
-                borderRadius: 2,
-                background: 'rgba(255, 255, 255, 0.05)',
-                backdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                transition: 'all 0.3s ease',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 12px 48px rgba(139, 92, 246, 0.15)',
-                },
-              }}
-            >
-              <Avatar
-                src={member.avatar}
-                sx={{
-                  width: 80,
-                  height: 80,
-                  mx: 'auto',
-                  mb: 3,
-                  background:
-                    'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
-                  fontSize: '1.5rem',
-                  fontWeight: 600,
-                  boxShadow: '0 4px 24px rgba(139, 92, 246, 0.3)',
-                }}
-              >
-                {member.name.charAt(0)}
-              </Avatar>
-              <Typography
-                variant="h6"
-                sx={{
-                  fontWeight: 600,
-                  mb: 1,
-                  color: 'text.primary',
-                }}
-              >
-                {member.name}
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{
-                  mb: 2,
-                  color: 'text.secondary',
-                  opacity: 0.8,
-                }}
-              >
-                {member.role}
-              </Typography>
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  gap: 2,
-                  mt: 2,
-                }}
-              >
-                <Link
-                  href={member.linkedin}
-                  sx={{ display: 'flex', alignItems: 'center' }}
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect
-                      width="24"
-                      height="24"
-                      rx="6"
-                      fill="rgba(139,92,246,0.15)"
-                    />
-                    <path
-                      d="M8.25 9.5V16.25"
-                      stroke="#8B5CF6"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M8.25 7.75V7.76"
-                      stroke="#8B5CF6"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M12 12.5V16.25"
-                      stroke="#8B5CF6"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M12 12.5C12 11.2574 13.0074 10.25 14.25 10.25C15.4926 10.25 16.5 11.2574 16.5 12.5V16.25"
-                      stroke="#8B5CF6"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </Link>
-                <Link
-                  href={member.github}
-                  sx={{ display: 'flex', alignItems: 'center' }}
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect
-                      width="24"
-                      height="24"
-                      rx="6"
-                      fill="rgba(6,182,212,0.15)"
-                    />
-                    <path
-                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-                      stroke="#06B6D4"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </Link>
-              </Box>
-            </Box>
+    <section className="features">
+      <div className="container">
+        <h2 className="section-title">What Makes Us Different</h2>
+        <div className="features-grid">
+          {features.map((feature, index) => (
+            <div key={index} className="feature-card">
+              <h3 className="feature-title">{feature.title}</h3>
+              <p className="feature-description">{feature.description}</p>
+            </div>
           ))}
-        </Box>
-      </Box>
+        </div>
+      </div>
+    </section>
+  )
+}
 
-      <Box
-        id="why-creevo-section"
-        sx={{ textAlign: 'center', mt: 20, mb: 12, py: 4 }}
-      >
-        <Typography variant="h2" sx={{ mb: 4, color: 'text.primary' }}>
-          Why Creevo?
-        </Typography>
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
-            gap: 4,
-            maxWidth: 1000,
-            mx: 'auto',
-          }}
-        >
-          <Box
-            sx={{
-              p: 4,
-              borderRadius: 3,
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid rgba(139,92,246,0.15)',
-              boxShadow: '0 4px 24px rgba(139, 92, 246, 0.10)',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              transition: 'all 0.3s',
-              '&:hover': {
-                transform: 'translateY(-4px)',
-                boxShadow: '0 12px 48px rgba(139, 92, 246, 0.15)',
-              },
-            }}
-          >
-            <Box sx={{ mb: 2 }}>
-              <Box
-                sx={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: '50%',
-                  background:
-                    'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 4px 24px rgba(139, 92, 246, 0.3)',
-                }}
-              >
-                <Bolt sx={{ color: '#fff', fontSize: 24 }} />
-              </Box>
-            </Box>
-            <Typography
-              variant="h6"
-              sx={{ mb: 1, fontWeight: 600, color: 'text.primary' }}
-            >
-              Lightning Fast
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{ opacity: 0.8, color: 'text.secondary' }}
-            >
-              Experience quickly developed demos that are ready to be shared
-              with your audience.
-            </Typography>
-          </Box>
+function Pricing() {
+  return (
+    <section className="pricing">
+      <div className="container">
+        <h2 className="section-title">Pricing</h2>
+        <div className="pricing-content">
+          <div className="pricing-card">
+            <div className="pricing-badge">Private Alpha</div>
+            <h3 className="pricing-title">Free During Private Alpha</h3>
+            <p className="pricing-description">
+              We're currently in private alpha, so all prototypes are free. Once we launch, we expect to charge about <strong>$50</strong> for an average feature prototype, sometimes a little more or a little less depending on task complexity.
+            </p>
+            <div className="pricing-guarantee">
+              <p>There's no charge if the AI is unable to complete the task and you don't want to loop in a Creevo Developer.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
 
-          {/* Card 2 */}
-          <Box
-            sx={{
-              p: 4,
-              borderRadius: 3,
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid rgba(6,182,212,0.15)',
-              boxShadow: '0 4px 24px rgba(6,182,212,0.10)',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              transition: 'all 0.3s',
-              '&:hover': {
-                transform: 'translateY(-4px)',
-                boxShadow: '0 12px 48px rgba(6,182,212,0.15)',
-              },
-            }}
-          >
-            <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center' }}>
-              <svg
-                width="40"
-                height="40"
-                viewBox="0 0 40 40"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="20" cy="20" r="20" fill="url(#funding)" />
-                <text
-                  x="20"
-                  y="22"
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                  fontSize="22"
-                  fontWeight="bold"
-                  fill="#fff"
-                  fontFamily="Arial, Helvetica, sans-serif"
-                >
-                  $
-                </text>
-                <defs>
-                  <linearGradient
-                    id="funding"
-                    x1="0"
-                    y1="0"
-                    x2="40"
-                    y2="40"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stopColor="#8B5CF6" />
-                    <stop offset="1" stopColor="#06B6D4" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </Box>
-            <Typography
-              variant="h6"
-              sx={{ mb: 1, fontWeight: 600, color: 'text.primary' }}
-            >
-              Affordable + High Quality
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{ opacity: 0.8, color: 'text.secondary' }}
-            >
-              Get professional demo development at a fraction of the cost,
-              making quality accessible to indie developers.
-            </Typography>
-          </Box>
+function FAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
 
-          {/* Card 3 */}
-          <Box
-            sx={{
-              p: 4,
-              borderRadius: 3,
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid rgba(139,92,246,0.15)',
-              boxShadow: '0 4px 24px rgba(139, 92, 246, 0.10)',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              transition: 'all 0.3s',
-              '&:hover': {
-                transform: 'translateY(-4px)',
-                boxShadow: '0 12px 48px rgba(139, 92, 246, 0.15)',
-              },
-            }}
-          >
-            <Box sx={{ mb: 2 }}>
-              <Box
-                sx={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: '50%',
-                  background:
-                    'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 4px 24px rgba(139, 92, 246, 0.3)',
-                }}
-              >
-                <EventAvailableIcon sx={{ color: '#fff', fontSize: 24 }} />
-              </Box>
-            </Box>
-            <Typography
-              variant="h6"
-              sx={{ mb: 1, fontWeight: 600, color: 'text.primary' }}
-            >
-              Always Available
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{ opacity: 0.8, color: 'text.secondary' }}
-            >
-              Schedule calls, share feedback, or get updates anytime. We're here
-              when you need us.
-            </Typography>
-          </Box>
-        </Box>
-      </Box>
+  const faqs = [
+    {
+      question: "I've used AI before and it sucked. Why is this different?",
+      answer: 'Creevo uses custom software built specifically for game development. Unlike generic AI tools, we\'re built directly on top of Godot, giving our AI access to real physics, collision detection, and game development tools. We built an entire workstation for the AI, complete with custom software harnesses that ensure the agent always has all the relevant documentation for how to use tools. We did lots of under-the-hood optimizations throughout our entire stack to build the best tool for game development prototyping, and we did all of this so you don\'t have to! We built our product so that you need zero AI knowledge to effectively use it. Our AI isn\'t general; it can\'t tell you about the weather in New York, but it is fantastic for making games. Email us if you want more details.',
+    },
+    {
+      question: 'How quickly can I get a prototype?',
+      answer: 'Initial prototypes are generated in minutes. Since everything is hosted in the cloud, you can iterate immediately if you need tweaks.',
+    },
+    {
+      question: 'Do I need to install anything?',
+      answer: 'No setup required. Everything runs in the cloud: our AI\'s virtual workspace, your game hosting, and the entire development environment.',
+    },
+    {
+      question: 'Can I use my own art assets?',
+      answer: 'Yes! Upload your art assets and our agent will integrate them directly into the prototype.',
+    },
+    {
+      question: 'How do I share prototypes with clients?',
+      answer: 'Every prototype gets a shareable link. Your clients can access it instantly—no downloads or setup required.',
+    },
+    {
+      question: 'What if the AI doesn\'t get it right the first time?',
+      answer: 'You can provide feedback and the AI can regenerate or tweak the prototype in minutes. Our agent also tests features multiple times before returning to ensure quality. If you run into frequent issues with the AI, we have a team of human developers experienced in making games, and we\'re happy to loop in a Creevo Developer to get your prototype done quickly and well.',
+    },
+  ]
 
-      {/* Final Join the Waitlist CTA */}
-      <Box
-        id="waitlist-section"
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          textAlign: 'center',
-          py: 8,
-          mb: 10,
-          borderRadius: 4,
-          background:
-            'linear-gradient(135deg, rgba(139,92,246,0.10) 0%, rgba(6,182,212,0.10) 100%)',
-          boxShadow: '0 4px 32px rgba(139,92,246,0.10)',
-        }}
-      >
-        <Typography variant="h2" sx={{ mb: 2, color: 'text.primary' }}>
-          Ready to get started?
-        </Typography>
-        <Typography
-          variant="body1"
-          sx={{ mb: 4, color: 'text.secondary', maxWidth: 500 }}
-        >
-          Join the waitlist and be the first to experience the future of
-          productivity with Creevo.
-        </Typography>
-        <Box
-          component="form"
-          sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', sm: 'row' },
-            alignItems: 'center',
-            gap: 2,
-            width: '100%',
-            maxWidth: 420,
-            mx: 'auto',
-          }}
-        >
-          <TextField
-            id="email-input-bottom"
-            label="Enter your email"
-            variant="outlined"
-            type="email"
-            value={email}
-            onChange={handleEmailChange}
-            fullWidth
-            sx={{ minWidth: 220 }}
-          />
-          <Button
-            variant="contained"
-            size="large"
-            onClick={handleJoinWaitlist}
-            disabled={isLoading}
-          >
-            {isLoading ? 'Joining...' : 'Join'}
-          </Button>
-        </Box>
-      </Box>
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index)
+  }
 
-      {/* Footer */}
-      <Box
-        component="footer"
-        sx={{
-          mt: 8,
-          py: 3,
-          borderTop: '1px solid rgba(255, 255, 255, 0.51)',
-          display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' },
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: 5,
-          color: 'rgba(255,255,255,0.7)',
-          background: 'transparent',
-        }}
-      >
-        <Typography variant="body2" sx={{ fontSize: '1rem', fontWeight: 500 }}>
-          © {new Date().getFullYear()} Creevo. All rights reserved.
-        </Typography>
-        <Box sx={{ display: 'flex', gap: 2 }}>
-          <a
-            href="https://www.linkedin.com/company/creevo-app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            style={{ color: 'inherit', display: 'flex', alignItems: 'center' }}
-          >
-            <svg
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect
-                width="24"
-                height="24"
-                rx="6"
-                fill="rgba(139,92,246,0.15)"
-              />
-              <path
-                d="M8.25 9.5V16.25"
-                stroke="#8B5CF6"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M8.25 7.75V7.76"
-                stroke="#8B5CF6"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M12 12.5V16.25"
-                stroke="#8B5CF6"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M12 12.5C12 11.2574 13.0074 10.25 14.25 10.25C15.4926 10.25 16.5 11.2574 16.5 12.5V16.25"
-                stroke="#8B5CF6"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </a>
-          <a
-            href="https://www.instagram.com/creevo.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-            style={{ color: 'inherit', display: 'flex', alignItems: 'center' }}
-          >
-            <svg
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="24" height="24" rx="6" fill="rgba(6,182,212,0.15)" />
-              <rect
-                x="7"
-                y="7"
-                width="10"
-                height="10"
-                rx="4"
-                stroke="#06B6D4"
-                strokeWidth="1.5"
-              />
-              <circle
-                cx="12"
-                cy="12"
-                r="2.5"
-                stroke="#06B6D4"
-                strokeWidth="1.5"
-              />
-              <circle cx="16" cy="8" r="0.75" fill="#06B6D4" />
-            </svg>
-          </a>
-        </Box>
-      </Box>
-    </Container>
-  );
-};
+  return (
+    <section className="faq">
+      <div className="container">
+        <h2 className="section-title">Frequently Asked Questions</h2>
+        <div className="faq-list">
+          {faqs.map((faq, index) => (
+            <div key={index} className={`faq-item ${openIndex === index ? 'open' : ''}`}>
+              <button className="faq-question-button" onClick={() => toggleFAQ(index)}>
+                <h3 className="faq-question">{faq.question}</h3>
+                <span className="faq-arrow">{openIndex === index ? '▼' : '▶'}</span>
+              </button>
+              {openIndex === index && (
+                <div className="faq-answer-wrapper">
+                  <p className="faq-answer">{faq.answer}</p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function Contact() {
+  return (
+    <section className="contact">
+      <div className="container">
+        <h2 className="section-title">Ready to Never Miscommunicate Again?</h2>
+        <p className="contact-text">
+          Join our private alpha and start prototyping features faster than ever.
+        </p>
+        <a href="mailto:mikil@creevo.app" className="cta-button cta-button-large">
+          Request Access
+        </a>
+      </div>
+    </section>
+  )
+}
+
+function Footer() {
+  return (
+    <footer className="footer">
+      <div className="container">
+        <p className="footer-text">
+          © 2024 Creevo. Built for game developers.
+        </p>
+      </div>
+    </footer>
+  )
+}
+
+export default LandingPage
+
