@@ -1,0 +1,50 @@
+---
+globs: *.tsx,*.ts,*.css
+---
+# Styling and Component Patterns
+
+## Component Structure
+The landing page is organized in [src/pages/landing/index.tsx](mdc:src/pages/landing/index.tsx) with these sections:
+- `Header` - Fixed header with logo
+- `Hero` - Main hero section with title and CTA
+- `WhyUs` - Introduction section
+- `Features` - Feature cards grid
+- `Pricing` - Pricing information
+- `FAQ` - Accordion-style FAQ section
+- `Contact` - Final CTA section
+- `Footer` - Footer with copyright
+
+## Styling Approach
+- **Theme Colors**: Defined in [src/theme/theme.ts](mdc:src/theme/theme.ts)
+  - Dark navy background (`#19181f`)
+  - Olive green accents (`#97823e`, `#545034`)
+  - Terracotta buttons (`#d38c57`)
+  - Light peach highlights (`#f1c67a`)
+- **CSS File**: [src/pages/landing/LandingPage.css](mdc:src/pages/landing/LandingPage.css) - All landing page styles
+- Uses CSS custom properties (CSS variables) for theming
+- Dark theme with glassmorphism effects on cards
+
+## Component Patterns
+
+### FAQ Accordion
+- Uses React `useState` to manage open/closed state
+- Only one FAQ item can be open at a time
+- Arrow indicators (▶ when closed, ▼ when open)
+- Smooth animations for expand/collapse
+
+### Feature Cards
+- Grid layout with `repeat(auto-fit, minmax(350px, 1fr))`
+- Hover effects with transform and border color changes
+- Transparent backgrounds with subtle borders
+
+### Responsive Design
+- Mobile breakpoint at 768px
+- Grid layouts collapse to single column on mobile
+- Font sizes scale down appropriately
+
+## Styling Guidelines
+- Use CSS custom properties from theme for colors
+- Maintain consistent spacing using theme spacing values
+- Use em dashes (—) for better readability in text
+- Keep grammar and capitalization consistent
+- Use semicolons for compound sentences in FAQ answers

@@ -1,0 +1,27 @@
+---
+alwaysApply: true
+---
+# Creevo Landing Page - Project Structure
+
+## Architecture Overview
+This is a React + TypeScript + Vite landing page application that:
+- Uses Vite for development and building
+- Serves static files via Express on port 8010
+- Is deployed to GCP VM using PM2 process management
+- Uses Nginx reverse proxy for domain routing (creevo.app)
+
+## Key Files and Directories
+- **Entry Point**: [src/main.tsx](mdc:src/main.tsx) - React app entry
+- **Main Component**: [src/App.tsx](mdc:src/App.tsx) - Root component
+- **Landing Page**: [src/pages/landing/index.tsx](mdc:src/pages/landing/index.tsx) - Main landing page component
+- **Landing Styles**: [src/pages/landing/LandingPage.css](mdc:src/pages/landing/LandingPage.css) - Landing page styles
+- **Theme System**: [src/theme/theme.ts](mdc:src/theme/theme.ts) - Color palette and theme tokens
+- **Server**: [server.js](mdc:server.js) - Express server for production
+- **PM2 Config**: [ecosystem.config.cjs](mdc:ecosystem.config.cjs) - PM2 process configuration
+- **Assets**: [public/assets/](mdc:public/assets/) - Static assets (logo.png, main_page.png)
+
+## Important Notes
+- [package.json](mdc:package.json) has `"type": "module"` - all JS files use ES modules
+- PM2 config file MUST be `.cjs` extension (not `.js`) due to ES module setup
+- Build output goes to `dist/` directory (gitignored)
+- Server serves static files from `dist/` directory

@@ -1,0 +1,44 @@
+---
+alwaysApply: false
+description: GCP deployment process and PM2 configuration for the Creevo landing page. Use this when deploying or managing the production server.
+---
+# Deployment and PM2 Configuration
+
+## GCP Deployment Process
+
+### Initial Setup
+1. Clone repository: `git clone https://github.com/Creevo-App/LandingPage.git ~/LandingPage`
+2. Navigate: `cd ~/LandingPage`
+3. Install dependencies: `npm install`
+4. Build project: `npm run build`
+5. Start PM2: `pm2 start ecosystem.config.cjs`
+6. Save PM2 config: `pm2 save`
+
+### Updating Deployment
+1. Pull latest: `cd ~/LandingPage && git pull origin main`
+2. Install/update dependencies: `npm install`
+3. Rebuild: `npm run build`
+4. Restart PM2: `pm2 restart creevo-landing`
+
+### PM2 Configuration
+- **Config File**: [ecosystem.config.cjs](mdc:ecosystem.config.cjs) - MUST be `.cjs` extension
+- **Process Name**: `creevo-landing`
+- **Port**: 8010 (set via PORT env var)
+- **Server File**: [server.js](mdc:server.js) - Express server using ES modules
+
+### Critical PM2 Requirement
+When [package.json](mdc:package.json) has `"type": "module"`, PM2 config files MUST use `.cjs` extension to use CommonJS syntax (`module.exports`). Using `.js` will cause "module is not defined" errors.
+
+### GCP VM Details
+- **VM Name**: `game-development-websocket-server`
+- **Project**: `creevodevelopment`
+- **Zone**: `us-central1-a`
+- **SSH Command**: `gcloud compute ssh game-development-websocket-server --zone=us-central1-a --project=creevodevelopment`
+- **Domain**: `creevo.app` (via Nginx reverse proxy on port 8010)
+
+### PM2 Commands
+- View status: `pm2 list`
+- View logs: `pm2 logs creevo-landing`
+- Restart: `pm2 restart creevo-landing`
+- Stop: `pm2 stop creevo-landing`
+- Save config: `pm2 save`
