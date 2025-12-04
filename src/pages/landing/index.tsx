@@ -125,7 +125,6 @@ function Pricing() {
         <h2 className="section-title">Pricing</h2>
         <div className="pricing-content">
           <div className="pricing-card">
-            <div className="pricing-badge">Private Alpha</div>
             <h3 className="pricing-title">Free During Private Alpha</h3>
             <p className="pricing-description">
               We're currently in private alpha, so all prototypes are free. Once we launch, we expect to charge about <strong>$50</strong> for an average feature prototype, sometimes a little more or a little less depending on task complexity.
