@@ -67,6 +67,7 @@ function WhyUs() {
 
 function Features() {
   const features = [
+    {
       title: 'Built on Game Engines',
       description: 'Our AI works with existing game development tools and frameworks to create games efficiently.',
     },
@@ -96,7 +97,6 @@ function Features() {
     },
     {
       title: 'Support When You Need It',
-      description: 'If you need help, our team is available to assist you with your projects.',
       description: 'If you need extra help or run into frequent issues, our team of experienced game developers is ready to step in to get your prototype wrapped up and ready to show off!',
     },
   ]
@@ -126,10 +126,10 @@ function Pricing() {
         <div className="pricing-content">
           <div className="pricing-card">
             <h3 className="pricing-title">Free During Private Alpha</h3>
+            <p className="pricing-description">
               We're currently in private alpha, so everything is free. Once we launch, pricing will vary based on project complexity and requirements.
             </p>
             <div className="pricing-guarantee">
-              <p>If we can't complete your project then no charge</p>
               <p>If we can't complete your prototype then no charge</p>
             </div>
           </div>
@@ -144,6 +144,7 @@ function FAQ() {
 
   const faqs = [
     {
+      question: "I've used AI before and it sucked. Why is this different?",
       answer: 'Creevo is built specifically for game development. We use specialized technology and tools designed for creating games. Our system is optimized for game development workflows and doesn\'t require any AI knowledge to use effectively.',
     },
     {
@@ -164,7 +165,6 @@ function FAQ() {
     },
     {
       question: 'What if the AI doesn\'t get it right the first time?',
-      answer: 'You can provide feedback and make adjustments quickly. Our system includes quality checks, and if you need additional help, our team is available to assist.',
       answer: 'You can provide feedback and the AI can regenerate or tweak the prototype in minutes. Our agent also tests features multiple times before returning to ensure quality. If you run into frequent issues with the AI, we have a team of human developers experienced in making games, and we\'re happy to loop in a Creevo Developer to get your prototype done quickly and well.',
     },
   ]
@@ -202,7 +202,7 @@ function Contact() {
     <section className="contact">
       <div className="container">
         <h2 className="section-title">Ready to Never Miscommunicate Again?</h2>
-          Join our private alpha and start creating games faster than ever.
+        <p className="contact-text">
           Join our private alpha and start prototyping features faster than ever.
         </p>
         <a href="mailto:mikil@creevo.app" className="cta-button cta-button-large">
