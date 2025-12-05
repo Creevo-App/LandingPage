@@ -2,43 +2,157 @@
 alwaysApply: false
 description: GCP deployment process and PM2 configuration for the Creevo landing page. Use this when deploying or managing the production server.
 ---
-# Deployment and PM2 Configuration
 
-## GCP Deployment Process
+# GCP Deployment and Infrastructure Setup
 
-### Initial Setup
+## Architecture Overview
+
+The Creevo landing page is deployed on a Google Cloud Platform (GCP) VM instance with the following architecture:
+
+```
+Internet → creevo.app (DNS) → Nginx Reverse Proxy → Express Server (port 8010) → Static Files (dist/)
+```
+
+### Request Flow
+
+1. User visits `creevo.app`
+2. DNS resolves to GCP VM public IP
+3. Nginx reverse proxy forwards requests to `localhost:8010`
+4. Express server ([server.js](mdc:server.js)) serves static files from `dist/` directory
+5. React app handles client-side routing
+
+## GCP VM Infrastructure
+
+### VM Instance Details
+
+- **VM Name**: `game-development-websocket-server`
+- **Project**: `creevodevelopment`
+- **Zone**: `us-central1-a`
+- **SSH Command**: `gcloud compute ssh game-development-websocket-server --zone=us-central1-a --project=creevodevelopment`
+
+### Multi-Service Architecture
+
+The VM hosts multiple services managed by PM2:
+
+- **creevo-landing** (port 8010) - Landing page Express server
+- **http** - Additional HTTP service
+- **websocket** - WebSocket service
+
+All services are managed via PM2 process manager for reliability and auto-restart capabilities.
+
+### Domain and Routing
+
+- **Domain**: `creevo.app`
+- **Nginx Configuration**: Reverse proxy configured to forward requests to `localhost:8010`
+- **Port**: 8010 (set via PORT environment variable in PM2 config)
+
+## Deployment Process
+
+### Deploying from Local Machine
+
+**One-command deployment** (after authentication):
+
+```bash
+gcloud compute ssh game-development-websocket-server --zone=us-central1-a --project=creevodevelopment --command="cd ~/LandingPage && git pull origin main && npm install && npm run build && pm2 restart creevo-landing"
+```
+
+**Step-by-step deployment**:
+
+1. Ensure you're authenticated: `gcloud auth login`
+2. SSH into VM: `gcloud compute ssh game-development-websocket-server --zone=us-central1-a --project=creevodevelopment`
+3. Navigate to project: `cd ~/LandingPage`
+4. Pull latest code: `git pull origin main`
+5. Install dependencies: `npm install`
+6. Build project: `npm run build` (creates `dist/` directory)
+7. Restart PM2 process: `pm2 restart creevo-landing`
+
+### Initial VM Setup (One-time)
+
 1. Clone repository: `git clone https://github.com/Creevo-App/LandingPage.git ~/LandingPage`
 2. Navigate: `cd ~/LandingPage`
 3. Install dependencies: `npm install`
 4. Build project: `npm run build`
 5. Start PM2: `pm2 start ecosystem.config.cjs`
-6. Save PM2 config: `pm2 save`
+6. Save PM2 config: `pm2 save` (ensures processes restart on VM reboot)
 
-### Updating Deployment
-1. Pull latest: `cd ~/LandingPage && git pull origin main`
-2. Install/update dependencies: `npm install`
-3. Rebuild: `npm run build`
-4. Restart PM2: `pm2 restart creevo-landing`
+## PM2 Configuration
 
-### PM2 Configuration
-- **Config File**: [ecosystem.config.cjs](mdc:ecosystem.config.cjs) - MUST be `.cjs` extension
+### Config File
+
+- **File**: [ecosystem.config.cjs](mdc:ecosystem.config.cjs)
+- **Extension**: MUST be `.cjs` (not `.js`)
 - **Process Name**: `creevo-landing`
 - **Port**: 8010 (set via PORT env var)
 - **Server File**: [server.js](mdc:server.js) - Express server using ES modules
 
 ### Critical PM2 Requirement
+
 When [package.json](mdc:package.json) has `"type": "module"`, PM2 config files MUST use `.cjs` extension to use CommonJS syntax (`module.exports`). Using `.js` will cause "module is not defined" errors.
 
-### GCP VM Details
-- **VM Name**: `game-development-websocket-server`
-- **Project**: `creevodevelopment`
-- **Zone**: `us-central1-a`
-- **SSH Command**: `gcloud compute ssh game-development-websocket-server --zone=us-central1-a --project=creevodevelopment`
-- **Domain**: `creevo.app` (via Nginx reverse proxy on port 8010)
-
 ### PM2 Commands
-- View status: `pm2 list`
+
+- View all processes: `pm2 list`
 - View logs: `pm2 logs creevo-landing`
+- View specific process logs: `pm2 logs creevo-landing --lines 100`
 - Restart: `pm2 restart creevo-landing`
 - Stop: `pm2 stop creevo-landing`
-- Save config: `pm2 save`
+- Start: `pm2 start ecosystem.config.cjs`
+- Save config: `pm2 save` (persists process list across reboots)
+- Monitor: `pm2 monit`
+
+## Server Configuration
+
+### Express Server
+
+The [server.js](mdc:server.js) file:
+
+- Serves static files from `dist/` directory (created by `npm run build`)
+- Handles React routing by returning `index.html` for all routes
+- Listens on port 8010 (configurable via PORT env var)
+- Uses ES modules (import/export syntax)
+
+### Build Process
+
+- **Command**: `npm run build` (runs `tsc && vite build`)
+- **Output**: `dist/` directory containing:
+  - `index.html`
+  - `assets/index-*.css` (styles)
+  - `assets/index-*.js` (JavaScript bundle)
+- **Build Location**: `~/LandingPage/dist/` on the VM
+
+## Troubleshooting
+
+### Build Failures
+
+- Check TypeScript compilation errors: `npm run build`
+- Verify all dependencies installed: `npm install`
+- Check for syntax errors in source files
+
+### PM2 Process Issues
+
+- Check process status: `pm2 list`
+- View error logs: `pm2 logs creevo-landing --err`
+- Restart if process stopped: `pm2 restart creevo-landing`
+- Check if port 8010 is in use: `lsof -i :8010`
+
+### Deployment Issues
+
+- Verify git pull succeeded: `git status`
+- Check build output exists: `ls -la dist/`
+- Verify PM2 process is running: `pm2 list`
+- Check Nginx is forwarding correctly (on VM): `sudo nginx -t`
+
+### Access Issues
+
+- Verify domain DNS points to VM: `dig creevo.app`
+- Check VM firewall rules allow HTTP/HTTPS traffic
+- Verify Nginx is running: `sudo systemctl status nginx`
+- Check Express server logs: `pm2 logs creevo-landing`
+
+## Important Notes
+
+- The `dist/` directory is gitignored and generated on each build
+- PM2 automatically restarts processes if they crash (autorestart: true)
+- Changes require rebuild (`npm run build`) before PM2 restart
+- The VM hosts multiple services - be careful when restarting PM2 processes
+- Always test build locally before deploying to production
