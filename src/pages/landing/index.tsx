@@ -32,11 +32,8 @@ function Hero() {
     <section className="hero">
       <div className="hero-content">
         <h1 className="hero-title">
-          Never miscommunicate about a feature again
-        </h1>
-        <p className="hero-subtitle">
           Build any video game with natural language
-        </p>
+        </h1>
         <div className="hero-cta-wrapper">
           <div className="hero-badge">
             <span>We're in private alpha</span>
